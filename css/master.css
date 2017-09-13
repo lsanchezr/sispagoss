@@ -1,0 +1,251 @@
+
+
+@import url('https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css');
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
+@import url('https://editor.datatables.net/extensions/Editor/css/editor.dataTables.min.css');
+@import url('https://cdn.datatables.net/select/1.2.2/css/select.dataTables.min.css');
+@import url('https://cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css');
+@import url('https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.css');
+@import url('https://rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css');
+@import url('imgs64base.css');
+@import url('mapa.css');
+
+.card-view {
+  clear: both;
+}
+.card-view .title {
+  display: block;
+  width: 30%;
+  float: left;
+}
+.card-view .value {
+  display: block;
+  width: 70%;
+  float: right;
+}
+
+.editable-input textarea{
+  width: 300px !important;
+  height: 120px !important;
+  resize: none;
+}
+
+.chart {
+  width: 100%;
+  height: 100%;
+  min-height: 350;
+}
+
+.Home{
+  font-size:25px;
+  color:#337ab7;
+  font-family: Arial;
+  font-weight: normal;
+  margin: 10px 10px 10px 10px;
+}
+
+header{
+  height: 50px;
+  display: inline-block;
+}
+.bbvaLogo{
+  fill:#005BAA;
+}
+.fullwidth{
+  margin:0 20px;
+}
+.navbar{
+  background: #072146;
+}
+.navbar-header{
+  width: 175px;
+}
+.navbar-header h1{
+  width: 80px; height:38px;
+  margin:7px 10px 0 0; position: relative; float: left;
+  background: url(data:image/svg+xml,%3Csvg%20width%3D%2255%22%20height%3D%2224.999999999999996%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%20%3Cmetadata%20id%3D%22metadata3440%22%3Eimage%2Fsvg%2Bxml%3C%2Fmetadata%3E%20%3Cg%20id%3D%22bbvaLogo_w%22%3E%20%3Ctitle%3EBBVA%3C%2Ftitle%3E%20%3Cg%20id%3D%22BBVA%22%3E%20%3Cpath%20fill%3D%22white%22%20id%3D%22svg_10%22%20d%3D%22m49.1%2C5.9c-0.5%2C-1.4%20-0.7%2C-1.7%20-2%2C-1.7l-3.1%2C0l-5%2C16.5l2.6%2C0l1.1%2C-3.5l6%2C0l1.1%2C3.5l4.5%2C0l-5.2%2C-14.8zm-5.8%2C8.8l2.3%2C-7.5l2.3%2C7.5l-4.6%2C0z%22%20class%3D%22bbvaLogo%22%2F%3E%20%3Cpath%20fill%3D%22white%22%20id%3D%22svg_11%22%20d%3D%22m24.1%2C10.7l0.9%2C-1.2c1.7%2C-2.5%200.5%2C-5.3%20-2.8%2C-5.3l-7.2%2C0l0%2C16.5l6.9%2C0c6.1%2C0%207.9%2C-7.1%202.2%2C-10m-5.3%2C7.8l0%2C-12.2l2.1%2C0c1%2C0%201.9%2C0.8%201.9%2C1.9c0%2C0.4%20-0.1%2C0.7%20-0.4%2C1.2l-1.4%2C2.1c1.4%2C0.3%202.4%2C1.4%202.4%2C3.5c0%2C2.5%20-1.5%2C3.5%20-3.5%2C3.5l-1.1%2C0z%22%20class%3D%22bbvaLogo%22%2F%3E%20%3Cpath%20fill%3D%22white%22%20id%3D%22svg_12%22%20d%3D%22m10.2%2C10.7l0.8%2C-1.2c1.7%2C-2.5%200.5%2C-5.3%20-2.8%2C-5.3l-7.2%2C0l0%2C16.5l6.9%2C0c6.1%2C0%207.9%2C-7.1%202.3%2C-10m-4.2%2C7.8l-1.1%2C0l0%2C-12.2l2.1%2C0c1%2C0%201.9%2C0.8%201.9%2C1.9c0%2C0.4%20-0.1%2C0.7%20-0.4%2C1.2l-1.4%2C2.1c1.4%2C0.3%202.4%2C1.4%202.4%2C3.5c0%2C2.4%20-1.5%2C3.5%20-3.5%2C3.5%22%20class%3D%22bbvaLogo%22%2F%3E%20%3Cpath%20fill%3D%22white%22%20id%3D%22svg_13%22%20d%3D%22m31.4%2C6.3c-0.6%2C-1.9%20-0.9%2C-2.1%20-2%2C-2.1l-2.9%2C0l5.4%2C16.5l4%2C0l5%2C-16.5l-2.6%2C0l-3.7%2C12.5l-3.2%2C-10.4z%22%20class%3D%22bbvaLogo%22%2F%3E%20%3C%2Fg%3E%20%3C%2Fg%3E%20%3Cg%3E%20%3Ctitle%3Ebackground%3C%2Ftitle%3E%20%3Crect%20x%3D%22-1%22%20y%3D%22-1%22%20width%3D%2257%22%20height%3D%2227%22%20id%3D%22canvas_background%22%20fill%3D%22none%22%2F%3E%20%3C%2Fg%3E%3C%2Fsvg%3E);
+  background-repeat:no-repeat;
+  background-size: contain;
+
+}
+
+.navbar-brand{
+  font-size: 10px;
+  line-height: 32px;
+  color: rgba(255, 255, 255, 0.6) !important;
+
+}
+.navbar-header figure{
+  display: none;
+  width: 50px;
+  height: 50px;
+  position: relative; float: left;
+  margin: 0 20px 0 0;
+}
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover{
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover{
+  background: #237aba; color: white !important;
+}
+.navbar-nav>li.dropdown{
+  height: 50px;
+}
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
+  background: #237aba; color: white !important;
+}
+
+.bbvaSty1{fill:#002F87;}
+.bbvaSty2{fill:#1E75BC;}
+.bbvaSty3{fill:#0A9DD9;}
+.bbvaSty4{fill:#61B4E4;}
+.bbvaSty5{fill:#9ACAEB;}
+.bbvaSty6{fill:#BAD8EB;}
+
+.Manto h3{
+  margin:3px 0 0 0; position: relative; float: right;
+}
+
+.Panel{
+  border: 1px solid #D8D8D8;
+  margin: 10px 5px 10px 5px;
+}
+
+.Panel .PanelHeader{
+  border-bottom: 1px solid #D8D8D8;
+  color:#094FA4;
+  font-size: 15px;
+  font-family: Arial;
+  font-weight: normal;
+  padding: 5px 5px 5px 10px;
+  background-color: #F2F2F2;
+}
+
+.Panel .PanelBody{
+  padding: 5px 5px 5px 5px;
+}
+
+.Table{
+  border: 1px solid #D8D8D8;
+  margin: 10px 5px 10px 5px;
+}
+
+.Table .TableHeader{
+  border-bottom: 1px solid #D8D8D8;
+  color:#094FA4; !important;
+  font-size: 15px;
+  font-family: Arial;
+  font-weight: normal;
+  padding: 5px 5px 5px 10px;
+  background-color: #F2F2F2;
+}
+
+.Table .TableBody{
+  padding: 5px 5px 5px 5px;
+}
+
+.TableResponsive thead th{
+  background-color: #F2F2F2;
+  color: #363636;
+  font-size: 13px;
+  font-family: Arial;
+  font-weight: normal;
+}
+
+.TableResponsive tbody td{
+  color: #363636;;
+  font-size: 12px;
+  font-family: Arial;
+  font-weight: normal;
+}
+
+.TableResponsive tbody tr:hover{
+  background:#F0F9FE;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 47px;
+  height: 28px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #337ab7;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #337ab7;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 28px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.selectpicker{
+  border-radius: 32px 32px 32px 32px;
+  -moz-border-radius: 32px 32px 32px 32px;
+  -webkit-border-radius: 32px 32px 32px 32px;
+  border: 0px solid #c7bdc7;
+
+  width: 100px; height: 30px;
+  background-color: #c7bdc7;
+  text-align: center;
+}
+
+.editable-click, a.editable-click, a.editable-click:hover{
+  border-bottom: none !important;
+}
+.PanelBody{
+  height: 440px
+}
+#divBusquedaAvanzada .PanelBody{
+  height: auto !important;
+}
+
+#home figure img{
+  height:100%;
+  margin: 0 auto;
+}

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="https://movil.bbva.es/apps/woody/assets/vendor/res/img/user_m.png">
+  <title>SISPAGOS</title>
+  <link rel="stylesheet" href="css/master.css">
+  <style media="screen"></style>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="collapsed navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <h1></h1>
+          <a class="navbar-brand">SISPAGOS</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+          <ul class="nav navbar-nav">
+            <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+            <li class="dropdown">
+              <a data-toggle="tab" href="#parametria">Parametría</a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Validación <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a data-toggle="tab" href="#resultados">Resultado de Validaciones</a></li>
+                <li><a data-toggle="tab" href="#indicadores">Indicadores de Resultados</a></li>
+                <li><a data-toggle="tab" href="#dependencias">Tablas y sus Dependencias.</a></li>
+              </ul>
+            </li>
+            <li><a data-toggle="tab" href="#DB">Base de Datos</a></li>
+            <li><a data-toggle="tab" href="#manto">Mantenimiento</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="container-fluid fullwidth">
+      <div class="row">
+        <div class="tab-content">
+          <section class="tab-pane fade in active" id="home">
+            <!-- <div class="Home"><span class="glyphicon glyphicon-home" aria-hidden="false"></span> Home</div> -->
+            <div class="row">
+              <div class="col-md-12">
+                <figure><img src="images/homeOK_Texto.svg" alt="home"></figure>
+              </div>
+            </div>
+          </section>
+
+          <section class="tab-pane fade" id="parametria">
+            <div class="Home"><span class="glyphicon glyphicon-saved" aria-hidden="false"></span> Parametría</div>
+            <div id="toolbar">
+               <button id="insert" class="btn btn-primary" onClick="insertarValidacion();">
+                  <i class="glyphicon glyphicon-check"></i> Insertar Validación
+               </button>
+              <button id="remove" class="btn btn-danger" disabled>
+                  <i class="glyphicon glyphicon-remove"></i> Eliminar Validación
+              </button>
+            </div>
+            <div id="busquedaAvanzada">
+              <div class="input-group-btn">
+                <button class="btn btn-default dropdown-toggle" aria-label="busAvanzada" title="Busqueda Avanzada" data-toggle="dropdown" type="button">
+                  <i class="glyphicon glyphicon-search icon-share"></i>
+                  <span class="caret"></span>
+                </button>
+                <div class="dropdown-menu stop-propagation" role="menu" style="min-width:345px;padding:5px;">
+                  <div class="row" style="margin:0px;">
+                    <div class="col-md-12">
+                      <label style="margin:0px;">Periodo</label>
+                      <select id="cmbPeriodosValid" class="form-control">
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row" style="margin:0px;">
+                    <div class="col-md-12">
+                      <label style="margin:0px;">Sección</label>
+                      <select id="cmbSeccionesValid" class="form-control" onchange="selectSeccion(this);">
+                        <option value="-1" selected >--Secciones--</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row" style="margin:0px;">
+                    <div class="col-md-12">
+                      <label style="margin:0px;">Concepto</label>
+                      <select id="cmbConceptosValid" class="form-control">
+                        <option value="-1" selected>--Conceptos--</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row" style="margin:0px;">
+                    <div class="col-md-12" style="margin:20px 10px 10px 0px;">
+                      <button type="button" class="btn btn-success btn-block" aria-label="" onClick="filtrarPeriodo();">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="botonera">
+              <div class="columns columns-right btn-group pull-right">
+                <button type="button" class="btn btn-default" aria-label="deletePeriodo" title="Eliminar Periodo" onClick="modalDeletePeriodo();">
+                  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default" aria-label="copyPeriodo" title="Duplicar Periodo" onClick="modalCopyPeriodo();">
+                  <span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+            <div class="TableResponsive">
+              <table id="tableValid" data-click-edit="true" data-toolbar="#toolbar" data-show-export="true"></table>
+            </div>
+            <div class="modal fade" tabindex="-1" id="dialogo_eliminar" role="dialog">
+            	<div class="modal-dialog" align="center">
+            		<div class="modal-content" align="left">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                      <span class="glyphicon glyphicon-remove-circle"></span>
+                    </button>
+                    <h4 class="modal-title">Eliminar Periodo</h4>
+                  </div>
+            			<div class="modal-body">
+            				<p>
+            					Estimado usuario, ¿Esta seguro de que desea eliminar el periodo seleccionado?
+            				</p>
+            			</div>
+            			<div class="modal-footer">
+            				<button type="button" class="btn btn-primary btn-100" data-dismiss="modal" onclick="eliminarPeriodo();">Confirmar</button>
+            				<button type="button" class="btn btn-primary btn-100" data-dismiss="modal" >Cancelar</button>
+            			</div>
+            		</div>
+            	</div>
+            </div>
+            <div class="modal fade" tabindex="-1" id="dialogo_duplicar" role="dialog">
+            	<div class="modal-dialog" align="center">
+            		<div class="modal-content" align="left">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                      <span class="glyphicon glyphicon-remove-circle"></span>
+                    </button>
+                    <h4 class="modal-title">Duplicar Periodo</h4>
+                  </div>
+            			<div class="modal-body">
+            				<p>
+            					Estimado usuario, Ingrese el nombre del nuevo periodo.
+            				</p>
+                    <form id="formPeriodo">
+                      <div class="form-group">
+                        <input type="number" id="txtPeriodo" name="txtPeriodo" class="form-control" placeholder="Nuevo Periodo"/>
+                      </div>
+                    </form>
+            			</div>
+            			<div class="modal-footer">
+            				<button type="button" id="btnDuplicarPeriodo" class="btn btn-primary btn-100" data-dismiss="modal" onclick="duplicarPeriodo();">Confirmar</button>
+            				<button type="button" class="btn btn-primary btn-100" data-dismiss="modal" >Cancelar</button>
+            			</div>
+            		</div>
+            	</div>
+            </div>
+            <div class="modal fade" tabindex="-1" id="add_validacion" role="dialog">
+            	<div class="modal-dialog" align="center">
+            		<div class="modal-content" align="left">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                      <span class="glyphicon glyphicon-remove-circle"></span>
+                    </button>
+                    <h4 class="modal-title">Insertar Validación</h4>
+                  </div>
+            			<div class="modal-body" style="overflow:auto;height:450px;">
+                    <form id="formValidacion">
+                      <div class="form-group">
+                        <label for="cdSeccion" class="control-label">*Sección</label>
+                        <div class="input-group">
+                          <select id="cdSeccion" name="cdSeccion" class="form-control" onchange="selectSeccionForm(this);">
+                            <option selected></option>
+                          </select>
+                          <span class="input-group-addon" style="padding-right:20px;"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="cdConcepto" class="control-label">*Concepto</label>
+                        <div class="input-group">
+                          <select id="cdConcepto" name="cdConcepto" class="form-control">
+                            <option selected></option>
+                          </select>
+                          <span class="input-group-addon" style="padding-right:20px;"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="stCriticidad" class="control-label">*Criticidad</label>
+                        <div class="input-group">
+                          <select id="stCriticidad" name="stCriticidad" class="form-control">
+                            <option selected></option>
+                            <option value="1">CRÍTICO</option>
+                            <option value="0">NO CRÍTICO</option>
+                          </select>
+                          <span class="input-group-addon" style="padding-right:20px;"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="fhCierre" class="control-label ">*Cierre</label>
+                        <input id="fhCierre" name="fhCierre" class="form-control"/>
+                      </div>
+                      <div class="form-group">
+                        <label for="nbEsquema" class="control-label">*Esquema Tbl.</label>
+                        <input id="nbEsquema" name="nbEsquema" class="form-control"/>
+                      </div>
+                      <div class="form-group">
+                        <label for="nbTabla" class="control-label">*Tbl. Origen</label>
+                        <input id="nbTabla" name="nbTabla" class="form-control" />
+                      </div>
+                      <div class="form-group">
+                        <label for="cdWorkflow" class="control-label">ID Workflow</label>
+                        <input id="cdWorkflow" name="cdWorkflow" class="form-control"/>
+                      </div>
+                      <div class="form-group">
+                        <label for="nbWorkflow" class="control-label">Workflow</label>
+                        <input id="nbWorkflow" name="nbWorkflow" class="form-control"/>
+                      </div>
+                      <div class="form-group">
+                        <label for="txSqlQuery" class="control-label">*Query</label>
+                        <textarea id="txSqlQuery" name="txSqlQuery" class="form-control" rows="4"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="txDesQuery" class="control-label ">*Desc.Qry</label>
+                        <textarea id="txDesQuery" name="txDesQuery" class="form-control" rows="2"></textarea>
+                      </div>
+                    </form>
+            			</div>
+            			<div class="modal-footer">
+            				<button type="button" id="btnInsertarValidacion" class="btn btn-primary btn-100" data-dismiss="modal" onclick="guardarValidacion();">Guardar</button>
+            				<button type="button" class="btn btn-primary btn-100" data-dismiss="modal" >Cancelar</button>
+            			</div>
+            		</div>
+            	</div>
+            </div>
+          </section>
+
+          <section class="tab-pane fade" id="resultados">
+            <div class="Home"><span class="glyphicon glyphicon-list" aria-hidden="false"></span> Resultado de Validaciones.</div>
+            <div id="busquedaAvanzadaResult">
+              <div class="input-group-btn">
+                <button class="btn btn-default dropdown-toggle" aria-label="busAvanzada" title="Busqueda Avanzada" data-toggle="dropdown" type="button">
+                  <i class="glyphicon glyphicon-search icon-share"></i>
+                  <span class="caret"></span>
+                </button>
+                <div class="dropdown-menu stop-propagation" role="menu" style="min-width:345px;padding:5px;">
+                  <div class="row" style="margin:0px;">
+                    <div class="col-md-12">
+                      <label style="margin:0px;">Periodo</label>
+                      <select id="cmbPeriodosResult" class="form-control">
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row" style="margin:0px;">
+                    <div class="col-md-12">
+                      <label style="margin:0px;">Sección</label>
+                      <select id="cmbSeccionesResult" class="form-control" onchange="selectSeccionResult(this);">
+                        <option value="-1" selected >--Secciones--</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row" style="margin:0px;">
+                    <div class="col-md-12">
+                      <label style="margin:0px;">Concepto</label>
+                      <select id="cmbConceptosResult" class="form-control">
+                        <option value="-1" selected>--Conceptos--</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row" style="margin:0px;">
+                    <div class="col-md-12" style="margin:20px 10px 10px 0px;">
+                      <button type="button" class="btn btn-success btn-block" aria-label="" onClick="filtrarPeriodoResult();">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="TableResponsive">
+              <table id="tableResult" data-show-export="true"></table>
+            </div>
+          </section>
+
+          <section class="tab-pane fade" id="dependencias">
+            <div class="Home"><span class="glyphicon glyphicon-list-alt" aria-hidden="false"></span> Tablas y sus Dependencias.</div>
+            <div class="panel-group" id="listTable"></div>
+          </section>
+
+          <section class="tab-pane fade" id="DB">
+            <div class="Home"><span class="glyphicon glyphicon-tasks" aria-hidden="false"></span> Base de Datos.</div>
+          </section>
+
+          <section class="tab-pane fade" id="manto">
+            <div class="Home"><span class="glyphicon glyphicon-cog" aria-hidden="false"></span> Mantenimiento.</div>
+            <input type="text" id="datepicker" style="width:80px;">
+            <input type="button" id="btnBuscar" value="Buscar" onclick="js_buscar();"/>
+            <input type="button" id="btnLimpiar" value="Limpiar" onclick="js_limpiar();" />
+            <table id="table_manto" class="display"></table>
+          </section>
+
+          <section class="tab-pane fade" id="indicadores">
+            <div class="Home"><span class="glyphicon glyphicon-hand-right" aria-hidden="false"></span> Indicadores de Resultados.</div>
+            <div class="row">
+              <div class="col-md-4 col-xs-10">
+                <div style="padding-left:5px;">
+                  <select id="cmbIndicadores" style="min-width:375px;max-width:410px;"  class="form-control" onchange="loadIndicardor();">
+                    <option value="-1" selected hidden>Indicadores...</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-1 col-xs-1">
+                <button id="btnBusquedaAvanzada" type="button" class="btn btn-default" onclick="toggleBusquedaAvanzada();">
+                  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+            <div class="row" id="contenedorIndicadores"></div>
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js"></script>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/extensions/editable/bootstrap-table-editable.js"></script>
+<script src="https://rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/js/bootstrap-editable.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/extensions/mobile/bootstrap-table-mobile.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/extensions/export/bootstrap-table-export.js"></script>
+<script src="js/tableExport.js"></script>
+<script src="js/JSON.js"></script>
+<script src="js/manto.js"></script>
+<script src="js/parametria.js"></script>
+<script src="js/resultado.js"></script>
+<script src="js/indicadores.js"></script>
+<script src="js/dependencias.js"></script>
+<script>
+  $(function(){
+    $(function(){
+      var wH,wW,F_ImgWidth,mrgnImg;
+      wH = $(window).height()-70;
+      wW = $(window).width();
+      F_ImgWidth = $('#home figure img').outerWidth();
+      mrgnImg = (wW - F_ImgWidth)/3.3;
+      console.log(wW+' '+F_ImgWidth+' '+mrgnImg);
+      $('#home figure').css({
+        'height':wH
+      });
+      $('#home figure img').css({
+        'margin-left':mrgnImg
+      });
+
+    });
+  });
+</script>
+</html>

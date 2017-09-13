@@ -1,0 +1,22 @@
+{
+  "name": "sispagos",
+  "version": "1.0.0",
+  "description": "sispagos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/lodela/Sispagos.git"
+  },
+  "author": "NorbertoLodela, Leonet4, Lili",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/lodela/Sispagos/issues"
+  },
+  "homepage": "https://gitlab.com/lodela/Sispagos#README",
+  "keywords": [
+    "sispagos"
+  ]
+}

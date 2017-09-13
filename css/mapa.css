@@ -1,0 +1,36 @@
+/*figure#mapaInformacional{
+  border: solid 1px red;
+}
+figure#mapaInformacional svg{
+  width: 100% !important;
+}*/
+.mapa-container {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	padding-bottom: 100%;
+	vertical-align: middle;
+	overflow: hidden;
+}
+.svg-content {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+path[id^="e_"]{
+  opacity:1;
+  fill:#b9b9b9;
+  fill-opacity:1;
+  fill-rule:nonzero;
+  stroke:none;
+  stroke-width:2;
+  stroke-linejoin:miter;
+  stroke-miterlimit:4;
+  stroke-dasharray:none;
+  stroke-opacity:1;
+  cursor: pointer;
+}
+path[id^="e_"]:hover{
+  fill:rgba(7, 33, 70, 1);
+}
